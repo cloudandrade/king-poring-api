@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+//MOCK
+const Usuario = require('./Models/UsuarioModel')
+
 
 /**
  * @swagger
@@ -14,6 +17,12 @@ const router = express.Router();
  */
 router.get('/health', async (req, res) => {
 	res.send('Geek Store Api server online - Health check complete!');
+});
+
+router.get('/users', async (req, res) => {
+	const result = await Usuario.findAll();
+	console.log(result)
+	res.json(result);
 });
 
 /**
