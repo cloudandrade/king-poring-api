@@ -43,7 +43,7 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 logger.debug("## Swagger Configuration Done! ##")
-logger.debug(`Swagger documentation available on ${process.env.API_HOST}:${process.env.API_HOST}/api-docs`)
+logger.debug(`Swagger documentation available on ${process.env.API_HOST}:${process.env.API_PORT}/api-docs`)
 
 
 

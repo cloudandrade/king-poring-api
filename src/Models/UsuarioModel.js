@@ -1,6 +1,6 @@
 const db = require('../config/sequelizeConfig');
 const { STRING, INTEGER } = require('sequelize');
-const {UsuarioSchema} = require('../Schemas/UsuarioSchema')
+const {UsuarioSchema} = require('../schemas/UsuarioSchema')
 
 const Usuario =  db.sequelize.define('usuario',
 UsuarioSchema,
