@@ -22,6 +22,8 @@ router.get('/health', async (req, res) => {
 
 router.get('/users', controller.userFindAll);
 
+router.post('/users/comprador', controller.userCreateBuyer);
+
 /**
  * @swagger
  * /auth:

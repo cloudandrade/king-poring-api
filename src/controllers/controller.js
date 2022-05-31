@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 //Usuario Model
 const Usuario = require('../Models/UsuarioModel');
 const { PERFIL } = require('../helpers/constantHelper');
+const bcrypt = require('bcryptjs');
 
 exports.userLogin = async (req, res) => {
   Usuario.findOne({
@@ -70,21 +71,23 @@ exports.userCreateAdmin = (req, res) => {};
 
 exports.userCreateBuyer = (req, res) => {
   let newUser = {
-    perfil_id: PERFIL.COMPRADOR,
+    perfilId: PERFIL.COMPRADOR,
     nome: req.body.nome,
     email: req.body.email,
-    senha: req.body.senha,
+    senha: bcrypt.hashSync(req.body.senha, 8),
     telefone: req.body.telefone,
     cpf: req.body.cpf,
     dataNascimento: req.body.dataNascimento,
   };
 
-  Usuario.create(req.body)
+  Usuario.create(newUser)
     .then(() => {
-      return res.send('pessoa criada');
+      return res.status(200).send('pessoa criada');
     })
     .catch((err) => {
+      console.log('err: ' + err);
       console.log('não foi possível criar o usuario');
+      return res.status(500).send('Erro ao criar usuario');
     });
 
   /*Pessoa.create({
