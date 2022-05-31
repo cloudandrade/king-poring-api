@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 //Usuario Model
-const Usuario = require('./models/UsuarioModel');
+const Usuario = require('../Models/UsuarioModel');
+const { PERFIL } = require('../helpers/constantHelper');
 
-
-exports.userLogin = (req, res) => {
+exports.userLogin = async (req, res) => {
   Usuario.findOne({
     where: {
       email: req.body.email,
@@ -60,7 +60,7 @@ exports.userLogin = (req, res) => {
     });
 };
 
-exports.userFindAll = (req, res) => {
+exports.userFindAll = async (req, res) => {
   const result = await Usuario.findAll();
   console.log(result);
   res.json(result);
@@ -68,10 +68,35 @@ exports.userFindAll = (req, res) => {
 
 exports.userCreateAdmin = (req, res) => {};
 
-exports.userCreateBuyer = (req, res) => {};
+exports.userCreateBuyer = (req, res) => {
+  let newUser = {
+    perfil_id: PERFIL.COMPRADOR,
+    nome: req.body.nome,
+    email: req.body.email,
+    senha: req.body.senha,
+    telefone: req.body.telefone,
+    cpf: req.body.cpf,
+    dataNascimento: req.body.dataNascimento,
+  };
 
-exports.testAuthenticated = (req, res) => {
+  Usuario.create(req.body)
+    .then(() => {
+      return res.send('pessoa criada');
+    })
+    .catch((err) => {
+      console.log('não foi possível criar o usuario');
+    });
+
+  /*Pessoa.create({
+      //atributos que vamos inserir
+      nome: 'Jhon Doe',
+      idade: 28,
+      cpf: '89400098400'
+  })*/
+};
+
+exports.testAuthenticated = async (req, res) => {
   const result = await Usuario.findAll();
   console.log(result);
   res.json(result);
-}
+};

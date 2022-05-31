@@ -1,35 +1,30 @@
 const { STRING, INTEGER, DATEONLY } = require('sequelize');
 
 const UsuarioSchema = {
-        perfil_id: {
-            type: INTEGER,
-            required: true,
-        },
-        nome: {
-            type: STRING,
-            
-        },
-        email: {
-            type: STRING,
-            
-        },
-        senha: {
-            type: STRING,
-          
-        },
-        telefone: {
-            type: STRING,
-          
-        },
-        cpf: {
-            type: STRING,
-          
-        },
-        data_nascimento: {
-            type: STRING,
-          
-        }
-    
+  perfilId: {
+    type: INTEGER,
+    required: true,
+    field: 'perfil_id',
+  },
+  nome: {
+    type: STRING,
+  },
+  email: {
+    type: STRING,
+  },
+  senha: {
+    type: STRING,
+  },
+  telefone: {
+    type: STRING,
+  },
+  cpf: {
+    type: STRING,
+  },
+  dataNascimento: {
+    type: STRING,
+    field: 'data_nascimento',
+  },
 };
 
-module.exports = {UsuarioSchema};
+module.exports = { UsuarioSchema };

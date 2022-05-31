@@ -1,0 +1,6 @@
+exports.PERFIL = {
+  ADMIN: 1,
+  FUNCIONARIO: 2,
+  PARCEIRO: 3,
+  COMPRADOR: 4,
+};
