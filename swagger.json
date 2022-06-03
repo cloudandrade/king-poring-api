@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "KING-PORING API GEEKSTORE",
+    "description": "Uma Api Geekstore responsavel por gerenciamento de usuários e controle de acesso",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Servidor local"
+    },
+    {
+      "url": "http://geekstorewebapi.com",
+      "description": "Servidor de desenvolvimento"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "description": "Rota que checa se a aplicação está online e operando sem problemas",
+        "responses": {
+          "200": {
+            "description": "Geek Store Api server online - Health check complete!"
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "jhondoe@gmail.com",
+                "senha": "123456"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "autenticado"
+        }
+      }
+    },
+    "/auth/test": {
+      "get": {
+        "tags": ["Auth"],
+        "security": [{ "bearerAuth": [] }]
+      },
+      "responses": {
+        "200": { "description": "OK" },
+        "401": { "description": "Unauthorized" },
+        "500": { "description": "Internal Server Error" }
+      }
+    }
+  }
+}
