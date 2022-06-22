@@ -25,6 +25,8 @@ router.get('/health', async (req, res) => {
 
 router.get('/users', checkAdminAuthorization, controller.userFindAll);
 
+router.get('/user/:id', /* checkAuthorization, */ controller.userDetailOne);
+
 router.post('/users/comprador', controller.userCreateBuyer);
 
 router.post('/users/admin', controller.userCreateAdmin);

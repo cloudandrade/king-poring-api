@@ -69,7 +69,21 @@ exports.userFindAll = async (req, res) => {
   let params = await mountWhereParams(req.query);
   console.log('mounted where');
   console.log(JSON.stringify(params));
-  const result = await Usuario.findAll({ where: params });
+  const result = await Usuario.findAll({ where: params,  raw: true });
+  console.log(result);
+  res.json(result);
+};
+
+/**
+ * ###### userDetailOne - ########################################################
+ * @param {*} req
+ * @param {*} res
+ */
+ exports.userDetailOne = async (req, res) => {
+
+  let params = await mountWhereParams(req.params);
+
+  const result = await Usuario.findOne({ where: params, raw: true });
   console.log(result);
   res.json(result);
 };
